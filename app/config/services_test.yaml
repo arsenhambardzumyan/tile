@@ -1,0 +1,2 @@
+services:
+    App\Domain\Port\PriceProviderPort: '@App\Infrastructure\Price\StubPriceProvider'
