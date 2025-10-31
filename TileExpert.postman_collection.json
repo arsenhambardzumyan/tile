@@ -1,0 +1,237 @@
+{
+	"info": {
+		"_postman_id": "tile-expert-api-collection",
+		"name": "Tile Expert API",
+		"description": "API collection for Tile Expert test application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Price",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/price?factory={{factory}}&collection={{collection}}&article={{article}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"price"
+					],
+					"query": [
+						{
+							"key": "factory",
+							"value": "{{factory}}"
+						},
+						{
+							"key": "collection",
+							"value": "{{collection}}"
+						},
+						{
+							"key": "article",
+							"value": "{{article}}"
+						}
+					]
+				},
+				"description": "Scrape price from tile.expert website"
+			},
+			"response": []
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Get Order by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/{{orderId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"orders",
+								"{{orderId}}"
+							]
+						},
+						"description": "Get a single order by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Aggregate Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/aggregate?page={{page}}&per_page={{per_page}}&group={{group}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"orders",
+								"aggregate"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "{{page}}"
+								},
+								{
+									"key": "per_page",
+									"value": "{{per_page}}"
+								},
+								{
+									"key": "group",
+									"value": "{{group}}",
+									"description": "day, month, or year"
+								}
+							]
+						},
+						"description": "Get orders aggregated by day, month, or year with pagination"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/search?q={{query}}&page={{page}}&per_page={{per_page}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{query}}"
+						},
+						{
+							"key": "page",
+							"value": "{{page}}"
+						},
+						{
+							"key": "per_page",
+							"value": "{{per_page}}"
+						}
+					]
+				},
+				"description": "Search orders using Manticore search engine"
+			},
+			"response": []
+		},
+		{
+			"name": "SOAP",
+			"item": [
+				{
+					"name": "Get WSDL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/soap/wsdl",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"soap",
+								"wsdl"
+							]
+						},
+						"description": "Get SOAP WSDL definition"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n    <soap:Body>\n        <CreateOrder xmlns=\"http://tile.expert/api/soap\">\n            <name>Test Order</name>\n            <email>test@example.com</email>\n            <status>1</status>\n        </CreateOrder>\n    </soap:Body>\n</soap:Envelope>"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/soap",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"soap"
+							]
+						},
+						"description": "Create an order via SOAP request"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8081",
+			"type": "string"
+		},
+		{
+			"key": "factory",
+			"value": "cobsa",
+			"type": "string"
+		},
+		{
+			"key": "collection",
+			"value": "manual",
+			"type": "string"
+		},
+		{
+			"key": "article",
+			"value": "manu7530bcbm-manualbaltic7-5x30",
+			"type": "string"
+		},
+		{
+			"key": "page",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "per_page",
+			"value": "10",
+			"type": "string"
+		},
+		{
+			"key": "group",
+			"value": "day",
+			"type": "string"
+		},
+		{
+			"key": "orderId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "query",
+			"value": "test",
+			"type": "string"
+		}
+	]
+}
+
